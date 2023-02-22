@@ -31,4 +31,3 @@ class GithubClient:
                                 f.write(file_content.decoded_content)
                             except AssertionError:
                                 print(f'Unable to write {file_content.name}. No encoding specified.')
-
