@@ -1,3 +1,4 @@
+from sqlalchemy import and_
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
@@ -24,3 +25,8 @@ class CreatedIntervalsRepository:
 
     def get_incomplete_intervals(self):
         return self._session.query(CreatedIntervals).where(CreatedIntervals.is_completed == 0).order_by(CreatedIntervals.start_date)
+
+    def set_status_to_finished(self, start_date, end_date):
+        item = self._session.query(CreatedIntervals).where(and_(CreatedIntervals.start_date == start_date, CreatedIntervals.end_date == end_date)).one()
+        item.is_completed = True
+        self._session.commit()
