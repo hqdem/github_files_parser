@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, date
 import os
 from github import Github
 
@@ -33,3 +34,6 @@ class GithubClient:
                                 f.write(file_content.decoded_content)
                             except AssertionError:
                                 print(f'Unable to write {file_content.name}. No encoding specified.')
+
+    def get_rate_limit_refresh_time(self, time_hours_delta=3):
+        return datetime.combine(date.today(), self._client.get_rate_limit().core.reset.time()) + timedelta(hours=time_hours_delta)
