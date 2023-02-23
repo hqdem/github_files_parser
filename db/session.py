@@ -3,5 +3,5 @@ from sqlalchemy.orm import Session
 
 from config import Config
 
-engine = create_engine(Config.db_uri, echo=True)
+engine = create_engine(Config.db_uri, echo=False)
 session = Session(bind=engine)
