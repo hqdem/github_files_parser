@@ -21,3 +21,6 @@ class CreatedIntervalsRepository:
 
         self._session.add_all(db_intervals)
         self._session.commit()
+
+    def get_incomplete_intervals(self):
+        return self._session.query(CreatedIntervals).where(CreatedIntervals.is_completed == 0).order_by(CreatedIntervals.start_date)
