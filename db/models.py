@@ -8,6 +8,6 @@ class CreatedIntervals(Base):
     __tablename__ = 'repos_created_intervals'
 
     id = Column('id', Integer, primary_key=True)
-    start_date = Column('start_date', Date)
-    end_date = Column('end_date', Date)
+    start_date = Column('start_date', Date, unique=True)
+    end_date = Column('end_date', Date, unique=True)
     is_completed = Column('is_completed', Boolean, default=False)
