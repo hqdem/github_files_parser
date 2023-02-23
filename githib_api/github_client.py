@@ -8,10 +8,10 @@ class GithubClient:
     def __init__(self):
         self._client = Github(login_or_token=Config.github_access_token)
 
-    def search_repos_by_language(self, lang, start_time=None, end_time=None):
+    def search_repos_by_language(self, keyword, lang, start_time=None, end_time=None):
         if start_time is None and end_time is None:
-            return self._client.search_repositories(query=f'language:{lang}')
-        return self._client.search_repositories(query=f'language:{lang}+created:{start_time}..{end_time}')
+            return self._client.search_repositories(query=f'{keyword} language:{lang}')
+        return self._client.search_repositories(query=f'{keyword} language:{lang} created:{start_time}..{end_time}')
 
     def download_files_by_ext(self, repos, ext, save_path):
         for repo in repos:
